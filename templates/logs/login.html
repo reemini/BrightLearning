@@ -1,0 +1,88 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+
+            /* Center the image and position the close button */
+            .imgcontainer {text-align: center;
+                           margin: 24px 0 12px 0;
+                           position: relative;}
+
+            img.avatar {width: 20%;
+                        border-radius: 50%;}
+
+            /* The Modal (background) */
+            .modal {display: none; /* Hidden by default */
+                    position: fixed; /* Stay in place */
+                    z-index: 1; /* Sit on top */
+                    left: 0;
+                    top: 0;
+                    width: 100%; /* Full width */
+                    height: 100%; /* Full height */
+                    overflow: auto; /* Enable scroll if needed */
+                    background-color: rgb(0,0,0); /* Fallback color */
+                    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                    padding-top: 60px;}
+
+            /* Modal Content/Box */
+            .modal-content {background-color: #fefefe;
+                            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+                            border: 1px solid #888;
+                            width: 80%; /* Could be more or less, depending on screen size */}
+
+            /* The Close Button (x) */
+            .close {position: absolute;
+                    right: 25px;
+                    top: 0;
+                    color: #000;
+                    font-size: 35px;
+                    font-weight: bold;}
+
+            .close:hover, .close:focus {color: red;
+                                        cursor: pointer;}
+
+            .label1 {text-align:left;
+                   float:left;}
+
+        </style>
+    </head>
+    <body>  
+        <div id="login">
+            <form class="modal-content animate" action="" method="post">
+                {%csrf_token%}
+                <div class="imgcontainer">
+                    <a href="{% url 'home' %}">
+                        <span class="close" title="Close Modal">&times;</span>
+                    </a>
+                    <img src="{% static 'logs\image\avatar.png' %}" alt="Avatar" class="avatar">
+                </div>
+                
+                <div style="padding: 16px;">
+                    <label class="label1" for="uname"><b>Username</b></label>
+                    <input class="form-control" type="text" placeholder="Enter Username" name="username" required> <br />
+
+                    <label class="label1" for="psw"><b>Password</b></label>
+                    <input class="form-control" type="password" placeholder="Enter Password" name="password" required> <br />
+
+                    {% for message in messages %}
+                        <p id="messages">{{message}}</p>
+                    {% endfor %}
+
+                    <br /><p>Don't have an account? <a href="{% url 'signup' %}" style="color:dodgerblue">Signup</a> instead.</p>
+
+                    <div style="padding: 16px;" style="background-color:#f1f1f1">
+                        <button class="btn btn-primary" type="submit" style="float: left; margin-right: 10px;">Login</button>
+                        <a href="{% url 'home' %}" class="btn btn-danger" style="float: left;">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
+{% endblock %}

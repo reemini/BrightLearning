@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<script>
+    alert ("You have no access to this page, please login first");
+    window.location.href = "{% url 'login' %}";
+</script>
+
+
+{% endblock %}

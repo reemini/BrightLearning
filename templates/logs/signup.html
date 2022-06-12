@@ -1,0 +1,101 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+
+            /* Center the image and position the close button */
+            .imgcontainer {text-align: center;
+                           margin: 24px 0 12px 0;
+                           position: relative;}
+
+            img.avatar {width: 20%;
+                        border-radius: 50%;}
+
+            /* Modal Content/Box */
+            .modal-content {background-color: #fefefe;
+                            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+                            border: 1px solid #888;
+                            width: 80%; /* Could be more or less, depending on screen size */}
+
+            /* The Close Button (x) */
+            .close {position: absolute;
+                    right: 25px;
+                    top: 0;
+                    color: #000;
+                    font-size: 35px;
+                    font-weight: bold;}
+
+            .close:hover, .close:focus {color: red;
+                                        cursor: pointer;}
+
+            .label1 {text-align:left;
+                   float:left;}
+
+        </style>
+    </head>
+    <body>        
+        <div id="signup">
+            <form class="modal-content animate" action="" method="POST">
+                {%csrf_token%}
+                <div class="imgcontainer">
+                    <a href="{% url 'home' %}">
+                        <span class="close">&times;</span>
+                    </a>
+                    <img src="{% static 'logs\image\avatar.png' %}" alt="Avatar" class="avatar">
+                </div>
+
+                <div style="padding: 16px;">
+                    <label class="label1" for="uname"><b>Username</b></label>
+                    {{form.username}}<br />
+
+                    <label class="label1" for="email"><b>Email</b></label>
+                    {{form.email}}<br />
+
+                    <label class="label1" for="psw"><b>Password</b></label>
+                    {{form.password1}}<br />
+            
+                    <label class="label1" for="psw-repeat"><b>Confirm Password</b></label>
+                    {{form.password2}}<br />
+            
+                    {{form.errors}}
+                    
+                    <br /><p>Already have an account? <a href="{% url 'login' %}" style="color:dodgerblue">Login</a> instead.</p>
+                
+                    <div style="padding: 16px;">
+                        <button class="btn btn-primary" type="submit" style="float: left; margin-right: 10px;">signup</button>
+                        <a href="{% url 'home' %}" class="btn btn-danger" style="float: left;">Cancel</a>
+                    </div>
+                </div>        
+            </form>
+        </div>
+    </body>
+
+    <script>
+        var form_fields = document.getElementsByTagName('input')
+		form_fields[1].placeholder='Username..';
+		form_fields[2].placeholder='Email..';
+		form_fields[3].placeholder='Enter password...';
+		form_fields[4].placeholder='Re-enter Password...';
+
+
+		for (var field in form_fields){	
+			form_fields[field].className += ' form-control'
+		}
+    </script>
+</html>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
